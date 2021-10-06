@@ -1,0 +1,26 @@
+package c0321g1_pawnshop_backend.entity.finance;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Finance {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long financeId;
+    private int moneyInKet;
+    private int currentCapital;
+    private int inVestment;
+    private int expectedProfit;
+}
