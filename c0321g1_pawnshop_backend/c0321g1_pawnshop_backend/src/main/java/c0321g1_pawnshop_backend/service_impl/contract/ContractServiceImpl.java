@@ -20,20 +20,21 @@ public class ContractServiceImpl implements ContractService {
     //    creator: vinhdn. Get list contract
     @Override
     public Page<Contract> getListContract(Pageable pageable) {
-        return contractRepository.getListContract(pageable);
+        return contractRepository.getListContract(pageable,1);
     }
 
     //    creator: vinhdn. search contract
     @Override
     public Page<Contract> searchContract(Pageable pageable, String contractCode, String customerName,
                                          String productName, String startDate) {
-        return contractRepository.searchContract(pageable, contractCode, customerName, productName, startDate);
+        return contractRepository.searchContract(pageable, contractCode,
+                customerName, productName, startDate,1);
     }
 
     //    creator: vinhdn. payment contract
     @Override
     public void paymentContract(int totalMoney, Long contractId) {
-        contractRepository.paymentContract(totalMoney, contractId);
+        contractRepository.paymentContract(0, totalMoney, contractId);
     }
 
     //    creator: vinhdn. send mail contract

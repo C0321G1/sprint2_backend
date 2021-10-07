@@ -1,5 +1,6 @@
 package c0321g1_pawnshop_backend.controller.contract;
 
+import c0321g1_pawnshop_backend.dto.contract.ContractDto;
 import c0321g1_pawnshop_backend.entity.contract.Contract;
 import c0321g1_pawnshop_backend.service.contract.ContractService;
 import c0321g1_pawnshop_backend.service.contract.StatusContractService;
@@ -52,7 +53,10 @@ public class ContractRestController {
     }
 
     @PostMapping("/payment")
-    public ResponseEntity<Contract> paymentContract(@RequestBody Contract contract) {
+    public ResponseEntity<Contract> paymentContract(@RequestBody ContractDto contract) {
+        if (contract.getContractId() == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
         contractService.paymentContract(contract.getTotalMoney(), contract.getContractId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
