@@ -1,7 +1,7 @@
 package c0321g1_pawnshop_backend.controller.contract;
 
+import c0321g1_pawnshop_backend.dto.contract.ContractDto;
 import c0321g1_pawnshop_backend.entity.contract.Contract;
-import c0321g1_pawnshop_backend.entity.customer.Customer;
 import c0321g1_pawnshop_backend.service.contract.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,7 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -73,7 +77,6 @@ public class ContractRestController {
         }
         return new ResponseEntity<>(contracts, HttpStatus.OK);
     }
-
 
 
 }

@@ -44,5 +44,4 @@ public class Contract {
     @ManyToOne
     @JoinColumn(name = "typeContractId",referencedColumnName = "typeContractId")
     private TypeContract typeContract;
-
 }

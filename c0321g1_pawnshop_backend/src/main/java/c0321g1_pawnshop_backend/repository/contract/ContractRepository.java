@@ -9,8 +9,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
-public interface ContractRepository extends JpaRepository<Contract, Long> {
+public interface ContractRepository extends JpaRepository<Contract,Long> {
     //vu code
     @Query(value = "SELECT  contract.*,customer.*,status_contract.*,type_contract.* from  contract" +
             " join customer on customer.customer_id = contract.customer_id" +
@@ -49,4 +51,13 @@ public interface ContractRepository extends JpaRepository<Contract, Long> {
             " join status_contract on status_contract.status_id = contract.status_id " +
             "where contract.contract_id =?1", nativeQuery = true)
     Contract findByContractId(Long contractId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO contract ( start_date, end_date," +
+            "product_name,loan,profit," +
+            "customer_id,status_id, type_contract_id)" +
+            "VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)", nativeQuery = true)
+    void updateContract( String startDate, String endDate, String productName, int loan, int profit, Long customerId, Long statusId, Long typeContractId);
+
 }
