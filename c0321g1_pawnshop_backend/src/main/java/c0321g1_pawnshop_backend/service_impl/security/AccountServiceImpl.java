@@ -6,6 +6,8 @@ import c0321g1_pawnshop_backend.service.security.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountServiceImpl implements AccountService {
     @Autowired
@@ -16,11 +18,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void saveAccount(Account account) {
-        System.out.println("hello");
-        System.out.println(account.getUsername());
-        System.out.println( account.getPassword());
-        System.out.println( account.getUserTime());
-        accountRepository.saveAccount(account.getUsername(), account.getPassword(), account.getUserTime());
+        accountRepository.saveAccount(account.getUsername(), account.getPassword());
     }
 
     @Override
@@ -31,5 +29,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void saveRoleForAccount(Long accountId, Long roleId) {
         accountRepository.saveRoleForAccount(accountId, roleId);
+    }
+
+    @Override
+    public List<Account> getAccountList() {
+        return accountRepository.getAccountList();
     }
 }

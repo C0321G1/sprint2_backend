@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface AccountRepository extends JpaRepository<Account, Long> {
     @Transactional
     @Modifying
-    @Query(value = "INSERT into account (username,password,user_time) values (?1,?2,?3); ", nativeQuery = true)
-    void saveAccount(String username, String password, String userTime);
+    @Query(value = "INSERT into account (username,password,user_time) values (?1,?2,curdate());", nativeQuery = true)
+    void saveAccount(String username, String password);
 
     @Query(value = "select * from account", nativeQuery = true)
     List<Account> getAccountList();

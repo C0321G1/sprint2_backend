@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,11 +26,19 @@ import java.util.Optional;
 public class EmployeeRestController {
     @Autowired
     private EmployeeService employeeService;
-
+    @Autowired
+    private AccountService accountService;
 
     // HauHP
     @PostMapping(value = "create")
     public ResponseEntity<Void> createEmployee(@RequestBody @Valid EmployeeDto employeeDto, BindingResult bindingResult) {
+        List<Account> accountList = accountService.getAccountList();
+        // check username exist
+        for (Account value : accountList) {
+            if (value.getUsername().equals(employeeDto.getAccountDto().getUsername())) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
         if (bindingResult.hasErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
