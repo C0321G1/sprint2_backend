@@ -24,7 +24,7 @@ public class StatisticController_statisticLiquidation {
     @Autowired
     StatisticRestController statisticRestController;
     @Test
-    void statisticLiquidation_1() throws Exception {
+    void statisticLiquidation_5() throws Exception {
         this.mockMvc.perform(
                 MockMvcRequestBuilders.get("/statisticLiquidation"))
                 .andDo(print())
@@ -34,7 +34,7 @@ public class StatisticController_statisticLiquidation {
 
 
     @Test
-    public void statisticLiquidation_2() {
+    public void statisticLiquidation_6() {
         ResponseEntity<List<Contract>> listResponseEntity
                 = this.statisticRestController.listStatisticLiquidation(Optional.of(""),Optional.of(""));
         List<Contract> contractList = listResponseEntity.getBody();

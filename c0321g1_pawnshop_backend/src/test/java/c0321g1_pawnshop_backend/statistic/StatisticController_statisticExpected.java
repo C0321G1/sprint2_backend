@@ -25,7 +25,7 @@ public class StatisticController_statisticExpected {
     @Autowired
     StatisticRestController statisticRestController;
     @Test
-    void statisticExpected_1() throws Exception {
+    void statisticExpected_5() throws Exception {
         this.mockMvc.perform(
                 MockMvcRequestBuilders.get("/statisticExpected"))
                 .andDo(print())
@@ -35,7 +35,7 @@ public class StatisticController_statisticExpected {
 
 
     @Test
-    public void statisticExpected_3() {
+    public void statisticExpected_6() {
         ResponseEntity<List<Contract>> listResponseEntity
                 = this.statisticRestController.listStatisticExpected(Optional.of(""),Optional.of(""));
         List<Contract> contractList = listResponseEntity.getBody();
