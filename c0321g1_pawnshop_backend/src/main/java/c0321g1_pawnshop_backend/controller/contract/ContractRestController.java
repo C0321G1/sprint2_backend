@@ -13,8 +13,6 @@ public class ContractRestController {
     @Autowired
     private ContractService contractService;
     @Autowired
-    private PeriodContractService periodContractService;
-    @Autowired
     private StatusContractService statusContractService;
     @Autowired
     private TypeContractService typeContractService;

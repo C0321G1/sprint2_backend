@@ -33,10 +33,6 @@ public class Contract {
     private StatusContract statusContract;
 
     @ManyToOne
-    @JoinColumn(name = "periodId",referencedColumnName = "periodId")
-    private PeriodContract periodContract;
-
-    @ManyToOne
     @JoinColumn(name = "customerId",referencedColumnName = "customerId")
     private Customer customer;
 

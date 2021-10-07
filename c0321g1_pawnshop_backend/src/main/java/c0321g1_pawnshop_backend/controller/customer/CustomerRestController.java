@@ -5,6 +5,9 @@ import c0321g1_pawnshop_backend.entity.customer.Customer;
 import c0321g1_pawnshop_backend.service.customer.CustomerService;
 import c0321g1_pawnshop_backend.service.customer.GenderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +25,13 @@ public class CustomerRestController {
     private CustomerService customerService;
 
     // Dong: method get list customer and count amount contract
-    @GetMapping("customer/list1")
-    public ResponseEntity <List<CusDTO>> findAllCustomerAndCountContract() {
-        List<CusDTO> cusDTOList = customerService.findAllCustomerAndCountContract();
-        if (cusDTOList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @GetMapping("customer/list")
+    public ResponseEntity<Page<CusDTO>> findAllCustomerAndCountContract(@PageableDefault(value = 2) Pageable pageable) {
+        Page<CusDTO> cusDTOPage = customerService.findAllCustomerAndCountContract(pageable);
+        if (cusDTOPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity(cusDTOList, HttpStatus.OK);
+        return new ResponseEntity(cusDTOPage, HttpStatus.OK);
     }
 
     // Dong: method delete customer with id
@@ -45,7 +48,7 @@ public class CustomerRestController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         Customer customer = customerService.findByIdCustomerDb(customerId);
-        if(customer!=null) {
+        if (customer != null) {
             return new ResponseEntity<>(customer, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
