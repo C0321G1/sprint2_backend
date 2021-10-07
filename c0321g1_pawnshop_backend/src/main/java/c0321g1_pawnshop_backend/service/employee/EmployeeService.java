@@ -10,11 +10,11 @@ import java.util.Optional;
 public interface EmployeeService {
 
     //create by HauHP
-    void saveEmployee(Employee employee);
+    void saveEmployee(EmployeeDto employeeDto);
 
     //create by HauHP
     Optional<Employee> findById(Long id);
 
     //create by HauHP
-    void editEmployee(Employee employee);
+    void editEmployee(EmployeeDto employeeDto);
 }

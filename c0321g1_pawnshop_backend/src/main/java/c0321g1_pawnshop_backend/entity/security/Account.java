@@ -1,6 +1,7 @@
 package c0321g1_pawnshop_backend.entity.security;
 
 import c0321g1_pawnshop_backend.entity.employee.Employee;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,11 +23,13 @@ public class Account {
     private String password;
     private String username;
     private String userTime;
+    @JsonBackReference
     @ManyToMany(targetEntity = Role.class)
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roleSet;
     @OneToOne(mappedBy = "account")
+    @JsonBackReference
     private Employee employee;
 }

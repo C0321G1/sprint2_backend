@@ -21,32 +21,24 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping
+@RequestMapping("employee")
 public class EmployeeRestController {
     @Autowired
     private EmployeeService employeeService;
-    @Autowired
-    private AccountService accountService;
+
 
     // HauHP
-    @PostMapping(value = "/employee")
-    public ResponseEntity<Void> createEmployee(@RequestBody @Valid EmployeeDto employeeDto) {
-        System.out.println(employeeDto.getAccount().getUsername());
-        System.out.println(employeeDto.getAccount().getPassword());
-        System.out.println(employeeDto.getAccount().getUserTime());
-
-        Employee employee = new Employee();
-        BeanUtils.copyProperties(employeeDto, employee);
-        System.out.println(employee.getEmail()+" day la email");
-        System.out.println("sau khi copy"+ employee.getAccount().getUsername());
-        this.accountService.saveAccount(employee.getAccount());
-        this.accountService.saveRoleForAccount(employee.getAccount().getAccountId(), (long) 1);
-        this.employeeService.saveEmployee(employee);
+    @PostMapping(value = "create")
+    public ResponseEntity<Void> createEmployee(@RequestBody @Valid EmployeeDto employeeDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        this.employeeService.saveEmployee(employeeDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // HauHP
-    @GetMapping("/employee/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
 
         if (id == null) {
@@ -60,12 +52,9 @@ public class EmployeeRestController {
     }
 
     // HauHP
-    @PatchMapping("/employee")
-    public ResponseEntity<Void> editEmployee(@RequestBody @Valid EmployeeDto employeeDto) {
-        Employee employee = new Employee();
-        BeanUtils.copyProperties(employeeDto, employee);
-        this.accountService.saveAccount(employee.getAccount());
-        this.employeeService.editEmployee(employee);
+    @PatchMapping("edit")
+    public ResponseEntity<Void> editEmployee(@RequestBody @Valid EmployeeDto employeeDto, BindingResult bindingResult) {
+        this.employeeService.editEmployee(employeeDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -11,6 +11,9 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
+
     @Override
     public void saveAccount(Account account) {
         System.out.println("hello");
