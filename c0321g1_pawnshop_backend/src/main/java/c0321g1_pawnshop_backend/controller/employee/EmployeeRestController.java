@@ -20,8 +20,8 @@ public class EmployeeRestController {
     private EmployeeService employeeService;
 
     //Creator: Nhung
-    @GetMapping("/listEmployee")
-    public ResponseEntity<List<Employee>> getTopGame() {
+    @GetMapping("listEmployee")
+    public ResponseEntity<List<Employee>> getListEmployee() {
         List<Employee> employeeList = employeeService.listEmployee();
         if (employeeList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

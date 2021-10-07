@@ -32,11 +32,10 @@ public class Employee {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id",referencedColumnName = "accountId")
-    @JsonBackReference
     private Account account;
-
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "gender_id", referencedColumnName = "genderId")
     private Gender gender;
+
 }

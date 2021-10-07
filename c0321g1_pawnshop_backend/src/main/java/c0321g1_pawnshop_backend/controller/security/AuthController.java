@@ -54,7 +54,7 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        accountRepository.changeStatus(1,userDetails.getAccountId());
+//        accountRepository.changeStatus(1,userDetails.getAccountId());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getAccountId(),
@@ -70,7 +70,7 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        accountRepository.changeStatus(0,userDetails.getAccountId());
+//        accountRepository.changeStatus(0,userDetails.getAccountId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

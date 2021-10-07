@@ -9,7 +9,7 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
 
     //Creator: Nhung
-    @Query(value = "SELECT employee.image,employee.name,account.username,account.status FROM employee " +
+    @Query(value = "SELECT employee.* FROM employee " +
             "join account on employee.account_id = account.account_id WHERE employee.flag = 0", nativeQuery = true)
     List<Employee> listEmployee();
 }
