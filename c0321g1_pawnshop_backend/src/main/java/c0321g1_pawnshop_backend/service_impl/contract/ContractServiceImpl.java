@@ -71,7 +71,7 @@ public class ContractServiceImpl implements ContractService {
                 contract.getProductName(), contract.getProductImage(), contract.getLoan(), contract.getProfit(),
                 contract.getCustomer().getCustomerId(), contract.getTypeProduct().getTypeProductId(),
                 1L,1L, 1,null,0);
-        sendSimpleEmail(contract);
+        sendEmailAfterCreateContract(contract);
         result.put("status", true);
         result.put("msg", "Thêm mới hợp đồng thành công.");
         return result;
@@ -97,18 +97,22 @@ public class ContractServiceImpl implements ContractService {
         return timeDiff >= 0;
     }
 
-    //creator: vinhdn. send mail contract
-    private void sendSimpleEmail(Contract contract) {
+    //Linh code
+    private void sendEmailAfterCreateContract(Contract contract) {
 
-        // Create a Simple MailMessage.
         SimpleMailMessage message = new SimpleMailMessage();
-
         message.setTo(contract.getCustomer().getEmail());
-        message.setSubject("[Thông báo] Tạo mới hợp đồng thành công");
-        message.setText("Chào, khách hàng " + contract.getCustomer().getName() + "\n"
-         + "Chúc mừng bạn đã được tạo mới hợp đồng thành công, mã hợp đồng là " + contract.getContractCode() + ".");
+        message.setSubject("[Thông báo] Tạo mới hợp đồng cầm đồ thành công");
+        message.setText("Chào, khách hàng " + contract.getCustomer().getName() + "\n" +
+                "Chúc mừng bạn đã tạo mới hợp đồng cầm đồ thành công. \n" +
+                "Thông tin hợp đồng: \n" +
+                "Mã hợp đồng: " + contract.getContractCode() + ".\n" +
+                "Ngày bắt đầu: " + contract.getStartDate() + ".\n" +
+                "Ngày kết thúc: " + contract.getEndDate() + ".\n" +
+                "Tiền cho vay: " + contract.getLoan()  + ".\n" +
+                "Tiền lãi: " + contract.getProfit() + ".\n" +
+                "Cảm ơn quý khách !");
 
-        // Send Message!
         javaMailSender.send(message);
     }
 }

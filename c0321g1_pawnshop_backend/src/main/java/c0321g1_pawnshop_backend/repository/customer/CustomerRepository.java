@@ -19,7 +19,7 @@ public interface CustomerRepository extends JpaRepository<Customer,Long> {
     Page<Customer> getCustomerList(Pageable pageable);
 
     //Linh code
-    @Query(value="select * from customer where employee_id = ?1", nativeQuery = true)
+    @Query(value="select * from customer where customer_id = ?1", nativeQuery = true)
     Optional<Customer> findById(Long id);
 
     //Linh code

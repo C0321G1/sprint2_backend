@@ -1,6 +1,9 @@
 package c0321g1_pawnshop_backend.dto.contract;
 
-import c0321g1_pawnshop_backend.dto.customer.CustomerDto;
+import c0321g1_pawnshop_backend.entity.contract.StatusContract;
+import c0321g1_pawnshop_backend.entity.contract.TypeContract;
+import c0321g1_pawnshop_backend.entity.contract.TypeProduct;
+import c0321g1_pawnshop_backend.entity.customer.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,8 +44,8 @@ public class ContractDto {
     private int loan;
 
     private int profit;
-    private StatusContractDto statusContract;
-    private CustomerDto customer;
-    private TypeProductDto typeProduct;
-    private TypeContractDto typeContract;
+    private StatusContract statusContract;
+    private Customer customer;
+    private TypeProduct typeProduct;
+    private TypeContract typeContract;
 }
