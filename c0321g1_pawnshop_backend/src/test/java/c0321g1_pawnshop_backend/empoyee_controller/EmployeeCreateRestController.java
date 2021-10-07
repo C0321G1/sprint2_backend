@@ -80,8 +80,8 @@ public class EmployeeCreateRestController {
         employeeDto.setGenderDto(genderDto);
 
         AccountDto accountDto = new AccountDto();
-        accountDto.setAccountId(1L);
-        accountDto.setUsername("hauhp");
+        accountDto.setAccountId(12L);
+        accountDto.setUsername("hauhpvv");
         accountDto.setPassword("123123");
         accountDto.setUserTime("2021-10-10");
         employeeDto.setAccountDto(accountDto);
