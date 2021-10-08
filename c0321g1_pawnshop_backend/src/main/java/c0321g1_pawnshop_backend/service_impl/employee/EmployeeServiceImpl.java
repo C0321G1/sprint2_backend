@@ -38,10 +38,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void saveEmployee(EmployeeDto employeeDto) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDto, employee);
+
         Account account = new Account();
         AccountDto accountDto = employeeDto.getAccountDto();
-        BeanUtils.copyProperties(employeeDto, employee);
+
         BeanUtils.copyProperties(accountDto, account);
+
         account.setAccountId(initAccountId(account));
         accountRepository.saveAccount(employeeDto.getAccountDto().getUsername(),employeeDto.getAccountDto().getPassword());
         accountDto.setAccountId(this.initAccountId(account));
@@ -49,7 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.saveEmployee(employeeDto.getAddress(), employeeDto.getBirthDate(),
                 employeeDto.getEmail(),employeeDto.getEmployeeCode(),employeeDto.getFlag(),
                 employeeDto.getIdCard(), employeeDto.getImage(), employeeDto.getName(),
-                employeeDto.getPhone(), employeeDto.getSalary(), account.getAccountId(),
+                employeeDto.getPhone(), employeeDto.getSalary(), this.initAccountId(account),
                 employeeDto.getGenderDto().getGenderId());
     }
 

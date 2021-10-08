@@ -4,6 +4,9 @@ import c0321g1_pawnshop_backend.entity.security.Account;
 import c0321g1_pawnshop_backend.repository.security.AccountRepository;
 import c0321g1_pawnshop_backend.service.security.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,13 +16,13 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+
 
     @Override
     public void saveAccount(Account account) {
         accountRepository.saveAccount(account.getUsername(), account.getPassword());
     }
+
 
     @Override
     public void editAccount(Account account) {

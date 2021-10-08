@@ -31,19 +31,19 @@ public class EmployeeRestController {
 
     // HauHP
     @PostMapping(value = "create")
-    public ResponseEntity<Void> createEmployee(@RequestBody @Valid EmployeeDto employeeDto, BindingResult bindingResult) {
+    public ResponseEntity<String> createEmployee(@RequestBody @Valid EmployeeDto employeeDto, BindingResult bindingResult) {
         List<Account> accountList = accountService.getAccountList();
         // check username exist
         for (Account value : accountList) {
             if (value.getUsername().equals(employeeDto.getAccountDto().getUsername())) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("exist username",HttpStatus.BAD_REQUEST);
             }
         }
         if (bindingResult.hasErrors()){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("error validate",HttpStatus.BAD_REQUEST);
         }
         this.employeeService.saveEmployee(employeeDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("ok",HttpStatus.CREATED);
     }
 
     // HauHP

@@ -19,6 +19,9 @@ repositories {
 }
 
 dependencies {
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+//    testImplementation 'org.springframework.security:spring-security-test'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -27,6 +30,18 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+//    testImplementation 'org.springframework.security:spring-security-test'
+//    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+//    implementation group: 'org.springframework', name: 'spring-context-support', version: '5.2.12.RELEASE'
+//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    implementation 'org.springframework.boot:spring-boot-starter-validation'
+//    implementation 'org.springframework.boot:spring-boot-starter-web'
+//    runtimeOnly 'mysql:mysql-connector-java'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    implementation 'com.paypal.sdk:rest-api-sdk:+'
 }
 
 test {

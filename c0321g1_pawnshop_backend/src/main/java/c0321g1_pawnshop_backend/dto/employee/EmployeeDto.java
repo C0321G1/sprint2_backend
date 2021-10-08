@@ -39,7 +39,6 @@ public class EmployeeDto {
     @NotEmpty
     @Email
     private String email;
-    @NotEmpty
     private String image;
     @NotEmpty
     private String phone;
