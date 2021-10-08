@@ -3,6 +3,7 @@ package c0321g1_pawnshop_backend.entity.customer;
 import c0321g1_pawnshop_backend.entity.contract.Contract;
 import c0321g1_pawnshop_backend.entity.employee.Employee;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,7 @@ public class Gender {
     private String name;
 
     @OneToMany(mappedBy = "gender", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonIgnore
     List<Customer> customers;
 
     @OneToMany(mappedBy = "gender",cascade = CascadeType.ALL)
