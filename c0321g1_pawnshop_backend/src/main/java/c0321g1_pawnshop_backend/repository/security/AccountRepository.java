@@ -29,8 +29,6 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE `account` " +
-            "SET `account`.status = ?1" +
-            "WHERE `account`.username = ?2 ", nativeQuery = true)
+    @Query(value = "UPDATE account SET account.status =?1 WHERE account.account_id =?2", nativeQuery = true)
     void changeStatus(int Status, Long accountId);
 }

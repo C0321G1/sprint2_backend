@@ -54,7 +54,7 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-//        accountRepository.changeStatus(1,userDetails.getAccountId());
+        accountRepository.changeStatus(1,userDetails.getAccountId());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getAccountId(),
@@ -64,13 +64,9 @@ public class AuthController {
                 roles));
     }
 
-    @PatchMapping("singout")
-    public ResponseEntity<Void> logout(@RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-//        accountRepository.changeStatus(0,userDetails.getAccountId());
+    @PatchMapping("singout/{employeeId}")
+    public ResponseEntity<Void> logout(@PathVariable(name = "employeeId") Long employeeId) {
+        accountRepository.changeStatus(0,employeeId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
