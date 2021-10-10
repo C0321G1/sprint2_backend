@@ -37,7 +37,7 @@ public class StatisticController_statisticInterest {
     @Test
     public void statisticInterest_6() {
         ResponseEntity<List<Contract>> listResponseEntity
-                = this.statisticRestController.listStatisticInterest(Optional.of(""),Optional.of(""));
+                = this.statisticRestController.listStatisticInterest("","");
         List<Contract> contractList = listResponseEntity.getBody();
         int statusCode = listResponseEntity.getStatusCodeValue();
 

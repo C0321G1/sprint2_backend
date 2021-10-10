@@ -36,7 +36,7 @@ public class StatisticController_statisticLiquidation {
     @Test
     public void statisticLiquidation_6() {
         ResponseEntity<List<Contract>> listResponseEntity
-                = this.statisticRestController.listStatisticLiquidation(Optional.of(""),Optional.of(""));
+                = this.statisticRestController.listStatisticLiquidation("","");
         List<Contract> contractList = listResponseEntity.getBody();
         int statusCode = listResponseEntity.getStatusCodeValue();
 

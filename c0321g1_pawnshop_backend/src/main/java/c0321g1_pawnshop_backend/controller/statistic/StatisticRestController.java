@@ -23,11 +23,16 @@ public class StatisticRestController {
     private StatisticService statisticService;
 
     @GetMapping("/statisticInterest")
-    public ResponseEntity<List<Contract>> listStatisticInterest(Optional<String> startDate , Optional<String> endDate){
+    public ResponseEntity<List<Contract>> listStatisticInterest(String startDate , String endDate){
+        if("".equals(startDate)  && "".equals(endDate)){
+            startDate = "2030-11-11";
+            endDate = "1800-11-11";
+        }
         try {
-            String endDateValue = endDate.orElse("");
-            String startDateValue = startDate.orElse("");
-            List<Contract> listContract = statisticService.listStatisticInterest(startDateValue,endDateValue);
+            List<Contract> listContract = statisticService.listStatisticInterest(startDate,endDate);
+            if (listContract==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
             return new ResponseEntity<>(listContract, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
@@ -36,11 +41,13 @@ public class StatisticRestController {
     }
 
     @GetMapping("/statisticLiquidation")
-    public ResponseEntity<List<Contract>> listStatisticLiquidation(Optional<String> startDate , Optional<String> endDate){
+    public ResponseEntity<List<Contract>> listStatisticLiquidation(String startDate , String endDate){
         try {
-            String endDateValue = endDate.orElse("");
-            String startDateValue = startDate.orElse("");
-            List<Contract> listContract = statisticService.listStatisticLiquidation(startDateValue,endDateValue);
+            if("".equals(startDate)  && "".equals(endDate)){
+                startDate = "2030-11-11";
+                endDate = "1800-11-11";
+            }
+            List<Contract> listContract = statisticService.listStatisticLiquidation(startDate,endDate);
             return new ResponseEntity<>(listContract, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
