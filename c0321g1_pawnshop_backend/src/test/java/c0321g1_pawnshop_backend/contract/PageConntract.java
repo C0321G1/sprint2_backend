@@ -14,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Optional;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -57,7 +55,5 @@ public class PageConntract {
         Assertions.assertEquals("Nhung", contractPage.getContent().get(0).getProductName());
 
 
-//        Assertions.assertEquals(1, servicesPage.getContent().get(0).getName());
-        //...
     }
 }

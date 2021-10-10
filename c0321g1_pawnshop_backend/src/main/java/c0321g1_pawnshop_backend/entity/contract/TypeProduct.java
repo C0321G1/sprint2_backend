@@ -22,10 +22,10 @@ public class TypeProduct {
     private String name;
 
     @OneToMany(mappedBy = "typeProduct", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonBackReference (value = "typeProduct-contract")
     List<Contract> contracts;
 
     @OneToMany(mappedBy = "typeProduct", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonBackReference (value = "typeProduct-pawnRegistration")
     List<PawnRegistration> pawnRegistrations;
 }

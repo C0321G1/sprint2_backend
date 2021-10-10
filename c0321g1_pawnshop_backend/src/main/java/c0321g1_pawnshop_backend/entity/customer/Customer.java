@@ -34,7 +34,7 @@ public class Customer {
     @JoinColumn(name = "genderId",referencedColumnName = "genderId")
     private Gender gender;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer")
     @JsonBackReference
     List<Contract> contracts;
 
