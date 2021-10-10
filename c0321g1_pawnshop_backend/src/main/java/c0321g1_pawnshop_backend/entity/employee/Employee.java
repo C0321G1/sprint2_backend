@@ -2,6 +2,9 @@ package c0321g1_pawnshop_backend.entity.employee;
 
 import c0321g1_pawnshop_backend.entity.customer.Gender;
 import c0321g1_pawnshop_backend.entity.security.Account;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,8 +36,8 @@ public class Employee {
     @JoinColumn(name = "account_id",referencedColumnName = "accountId")
     private Account account;
 
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "gender_id", referencedColumnName = "genderId")
     private Gender gender;
+
 }

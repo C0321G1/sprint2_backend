@@ -7,6 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 
 @Getter
 @Setter
@@ -14,16 +19,28 @@ import lombok.Setter;
 @AllArgsConstructor
 public class EmployeeDto {
     private Long employeeId;
+    @NotEmpty
+    @Min(1)
+    @NotNull
     private String salary;
+    @NotEmpty
+    @NotNull
     private String idCard;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String employeeCode;
+    @NotEmpty
     private String birthDate;
+    @NotEmpty
     private String address;
+    @NotEmpty
+    @Email
     private String email;
     private String image;
+    @NotEmpty
     private String phone;
-    private int flag;
-    private AccountDto account;
-    private GenderDto gender;
+    private Long flag;
+    private AccountDto accountDto;
+    private GenderDto genderDto;
 }
