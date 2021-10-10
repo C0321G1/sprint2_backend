@@ -16,4 +16,5 @@ public class AccountDto {
     private String username;
     private String userTime;
     private EmployeeDto employee;
+    private int status;
 }

@@ -6,7 +6,11 @@ import java.util.List;
 
 public interface NewsService {
 
-    List<News> findAll();
+    List<News> getNewsLimit10();
+
+    List<News> getNewsMore();
+
+    List<News> getNewsLimit5();
 
     void save(News news);
 }
