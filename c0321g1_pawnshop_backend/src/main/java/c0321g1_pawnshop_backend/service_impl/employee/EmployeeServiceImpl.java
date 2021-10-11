@@ -6,6 +6,7 @@ import c0321g1_pawnshop_backend.repository.employee.EmployeeRepository;
 import c0321g1_pawnshop_backend.repository.security.AccountRepository;
 import c0321g1_pawnshop_backend.service.employee.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -33,7 +38,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void editEmployee(EmployeeDto employeeDto) {
-        accountRepository.editAccount(employeeDto.getAccountDto().getUsername(),employeeDto.getAccountDto().getPassword(),employeeDto.getAccountDto().getAccountId());
+        Optional<Employee> employee = findById(employeeDto.getEmployeeId());
+
+        if (!employee.get().getAccount().getPassword().equals(employeeDto.getAccountDto().getPassword())) {
+            String passEncode = passwordEncoder.encode(employeeDto.getAccountDto().getPassword());
+            accountRepository.editAccount(employeeDto.getAccountDto().getUsername(),passEncode,employeeDto.getAccountDto().getAccountId());
+        }
+//        accountRepository.saveQuery(account.getUsername(), passEncode, null);
         employeeRepository.editEmployee(employeeDto.getAddress(), employeeDto.getBirthDate(),
                 employeeDto.getEmail(),employeeDto.getEmployeeCode(),employeeDto.getFlag(),
                 employeeDto.getIdCard(), employeeDto.getImage(), employeeDto.getName(),
