@@ -13,5 +13,5 @@ public interface ContractService {
                                   String customerName, String productName, String startDate);
 
     //    creator: vinhdn. payment contract
-    void paymentContract(int totalMoney,Long contractId);
+    void paymentContract(Contract contract);
 }

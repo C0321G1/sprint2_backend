@@ -1,10 +1,12 @@
 package c0321g1_pawnshop_backend.controller.contract;
 
+import c0321g1_pawnshop_backend.dto.contract.ContractDto;
 import c0321g1_pawnshop_backend.entity.contract.Contract;
 import c0321g1_pawnshop_backend.service.contract.ContractService;
 import c0321g1_pawnshop_backend.service.contract.StatusContractService;
 import c0321g1_pawnshop_backend.service.contract.TypeContractService;
 import c0321g1_pawnshop_backend.service.contract.TypeProductService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,8 +54,13 @@ public class ContractRestController {
     }
 
     @PostMapping("/payment")
-    public ResponseEntity<Contract> paymentContract(@RequestBody Contract contract) {
-        contractService.paymentContract(contract.getTotalMoney(), contract.getContractId());
+    public ResponseEntity<Contract> paymentContract(@RequestBody ContractDto contractDto) {
+        if (contractDto.getContractId() == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+        Contract contract = new Contract();
+        BeanUtils.copyProperties(contractDto,contract);
+        contractService.paymentContract(contract);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
