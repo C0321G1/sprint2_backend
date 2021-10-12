@@ -24,7 +24,7 @@ public interface ContractRepository extends JpaRepository<Contract, Long> {
             "  and ( status_contract.name like ?3)" +
             "  and ( type_contract.name like ?4)) " +
             "  and (contract.start_date between ?5 and ?6) and contract.flag = 1", nativeQuery = true)
-    
+
     Page<Contract> searchContract(String customer, String productName, String statusContract, String typeContract, String startDateFrom, String startDateTo, Pageable pageable);
 
     @Transactional
