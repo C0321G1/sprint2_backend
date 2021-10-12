@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.BindingResult;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ContractService {
@@ -16,12 +17,19 @@ public interface ContractService {
 
     void deleteContract(Long contractId);
 
-    Page<Contract> searchContract(Pageable pageable, String customer, String startDateForm, String startDateTo, String productName, String typeContract, String statusContract);
+    Page<Contract> searchContract(Pageable pageable, String customer, String statusContract, String typeContract, String productName,String startDateFrom, String startDateTo);
 
     //Khanh code
-    Page<Contract> searchTenContract(Pageable pageable, String customer, String statusContract);
+    List<Contract> searchTNameContract( String customer, String statusContract);
 
     Contract findByIdContract(Long contractId);
-    void updateContractDto(ContractEditDto contractEditDto);
+    void updateContractDto(Contract contract);
+    void save(Contract contract1);
+
+    List<Contract> page10Contract();
+
+    //vu code
+    List<String> getAllEmailToSend();
+
 
 }

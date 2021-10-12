@@ -14,7 +14,6 @@ import javax.validation.constraints.*;
 @Setter
 public class ContractDto {
     private Long contractId;
-
     @NotEmpty
     @Pattern(regexp = "^HD-\\d{4}$")
     private String contractCode;

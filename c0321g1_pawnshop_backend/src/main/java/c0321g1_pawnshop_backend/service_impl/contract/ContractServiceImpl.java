@@ -9,11 +9,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Service
@@ -40,18 +42,18 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public void deleteContract(Long contractId) {
-        this.contractRepository.deleteContract(contractId);
+    public void deleteContract(Long id) {
+        this.contractRepository.deleteContract(id);
     }
 
     @Override
-    public Page<Contract> searchContract(Pageable pageable, String customer, String startDateForm, String startDateTo, String productName, String typeContract, String statusContract) {
-        return this.contractRepository.searchContract(pageable, customer, statusContract, typeContract, productName, startDateForm, startDateTo);
+    public Page<Contract> searchContract(Pageable pageable, String customer, String productName, String statusContract, String typeContract, String startDateFrom, String startDateTo) {
+        return this.contractRepository.searchContract('%' + customer + '%','%' + productName + '%', '%' + statusContract + '%','%' + typeContract + '%',  startDateFrom , startDateTo ,pageable);
     }
 
     @Override
-    public Page<Contract> searchTenContract(Pageable pageable, String customer, String statusContract) {
-        return this.contractRepository.searchTenContract(pageable, customer, statusContract);
+    public List<Contract> searchTNameContract( String customer, String statusContract) {
+        return this.contractRepository.searchTenContract( customer, statusContract);
     }
 
     @Override
@@ -60,8 +62,36 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public void updateContractDto(ContractEditDto contractEditDto) {
+    public void updateContractDto(Contract contract) {
 
+    }
+
+    @Override
+    public void save(Contract contract1) {
+        this.contractRepository.save(contract1);
+    }
+
+    private void sendSimpleEmail(Contract contract) {
+
+        SimpleMailMessage message = new SimpleMailMessage();
+
+        message.setTo(contract.getCustomer().getEmail());
+        message.setSubject("[Thông báo] Hợp đồng Của Bạn Sắp Hết Hạn");
+        message.setText("Chào, khách hàng " + contract.getCustomer().getName() + "\n"
+                + "Hợp Đồng của bạn sắp hết hạn, mã hợp đồng là " + contract.getContractCode() + ".");
+
+        javaMailSender.send(message);
+    }
+
+    @Override
+    public List<Contract> page10Contract() {
+        return contractRepository.page10Contract();
+    }
+
+    //vu code
+    @Override
+    public List<String> getAllEmailToSend() {
+        return contractRepository.getAllEmailToSend();
     }
 
 }
