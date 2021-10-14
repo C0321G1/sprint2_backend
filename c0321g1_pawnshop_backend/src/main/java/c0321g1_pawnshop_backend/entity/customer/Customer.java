@@ -1,7 +1,6 @@
 package c0321g1_pawnshop_backend.entity.customer;
 
 import c0321g1_pawnshop_backend.entity.contract.Contract;
-import c0321g1_pawnshop_backend.entity.contract.TypeContract;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

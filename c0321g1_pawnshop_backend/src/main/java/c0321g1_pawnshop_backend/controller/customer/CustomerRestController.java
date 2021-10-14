@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping("/customer")
 public class CustomerRestController {
 
@@ -26,7 +26,7 @@ public class CustomerRestController {
 
     //Linh code
     @GetMapping
-    public ResponseEntity<Page<Customer>> getCustomerList(@PageableDefault(value = 5) Pageable pageable) {
+    public ResponseEntity<Page<Customer>> getCustomerList(@PageableDefault(value = 4) Pageable pageable) {
         Page<Customer> customers = customerService.getCustomerList(pageable);
         if (customers.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -36,7 +36,7 @@ public class CustomerRestController {
 
     //Linh code
     @GetMapping("/searchToCreateContract")
-    public ResponseEntity<Page<Customer>> searchToCreateContract(@PageableDefault(value = 5) Pageable pageable,
+    public ResponseEntity<Page<Customer>> searchToCreateContract(@PageableDefault(value = 4) Pageable pageable,
                                                                  @RequestParam Optional<String> keyword) {
         String keywordValue = "";
         if (keyword.isPresent()) {

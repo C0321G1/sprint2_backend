@@ -33,24 +33,11 @@ public class ContractServiceImpl implements ContractService {
         List<String> errors = new ArrayList<>();
         boolean isError = false;
         if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors().forEach(ob -> {
-                errors.add(ob.getDefaultMessage());
-            });
+            bindingResult.getAllErrors().forEach(ob ->
+                errors.add(ob.getDefaultMessage()));
             result.put("status", false);
             result.put("msg", "Tạo mới hợp đồng thất bại.");
             result.put("errors", errors);
-            isError = true;
-        }
-
-        if (checkCode(contractDto)) {
-            result.put("status", false);
-            result.put("msgCode", "Mã hợp đồng đã được sử dụng, vui lòng nhập lại.");
-            isError = true;
-        }
-
-        if (checkStartDate(contractDto)) {
-            result.put("status", false);
-            result.put("msgStartDate", "Ngày bắt đầu không được là ngày quá khứ, vui lòng chọn lại.");
             isError = true;
         }
 
@@ -66,6 +53,7 @@ public class ContractServiceImpl implements ContractService {
 
         Contract contract = new Contract();
         contractDto.setProductName(contractDto.getProductName().trim());
+        contractDto.setContractCode(initCode());
         BeanUtils.copyProperties(contractDto, contract);
         contractRepository.saveContract(contract.getContractCode(), contract.getStartDate(), contract.getEndDate(),
                 contract.getProductName(), contract.getProductImage(), contract.getLoan(), contract.getProfit(),
@@ -77,19 +65,16 @@ public class ContractServiceImpl implements ContractService {
         return result;
     }
 
-    private boolean checkCode(ContractDto contractDto) {
+    private String initCode() {
         List<Contract> contracts = contractRepository.getContractList();
-        for (Contract c : contracts) {
-            if (contractDto.getContractCode().equals(c.getContractCode())) {
-                return true;
-            }
+        String contractCode = "";
+        if (contracts.isEmpty()) {
+            contractCode = "HD-0001";
+        } else {
+            Long code = contracts.get(contracts.size() - 1).getContractId();
+            contractCode = "HD-" + String.format("%04d", ++code);
         }
-        return false;
-    }
-
-    private boolean checkStartDate(ContractDto contractDto) {
-        int timeDiff = contractDto.getStartDate().compareTo(LocalDate.now().toString());
-        return timeDiff < 0;
+        return contractCode;
     }
 
     private boolean checkEndDate(ContractDto contractDto) {
