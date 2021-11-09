@@ -33,7 +33,7 @@ public class Contract {
     private StatusContract statusContract;
 
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Customer.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "customerId",referencedColumnName = "customerId")
     private Customer customer;
 

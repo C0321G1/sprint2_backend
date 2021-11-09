@@ -2,7 +2,6 @@ package c0321g1_pawnshop_backend.entity.employee;
 
 import c0321g1_pawnshop_backend.entity.customer.Gender;
 import c0321g1_pawnshop_backend.entity.security.Account;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

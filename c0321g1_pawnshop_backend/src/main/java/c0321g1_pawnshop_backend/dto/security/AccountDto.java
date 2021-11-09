@@ -1,7 +1,5 @@
 package c0321g1_pawnshop_backend.dto.security;
 
-import c0321g1_pawnshop_backend.dto.employee.EmployeeDto;
-import c0321g1_pawnshop_backend.entity.employee.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,4 +14,5 @@ public class AccountDto {
     private String password;
     private String username;
     private String userTime;
+    private int status;
 }

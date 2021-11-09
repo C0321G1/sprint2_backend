@@ -1,11 +1,15 @@
 package c0321g1_pawnshop_backend.repository.employee;
 
 import c0321g1_pawnshop_backend.entity.employee.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
@@ -31,4 +35,32 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
             " `account_id` = ?11, `gender_id` = ?12 WHERE (`employee_id` = ?13);\n", nativeQuery = true)
     void editEmployee(String address, String birthDate, String email, String employeeCode, Long flag, String idCard,
                       String image, String name, String phone, String salary, Long accountId, Long genderId, Long employeeId);
+
+    // ly huynh
+    @Query(value = "select * from " +
+            "employee where flag = 0 ", nativeQuery = true)
+    Page<Employee> findAllEmployee(Pageable pageable);
+    @Modifying
+    @Transactional
+    @Query(value = "update employee " +
+            "set flag=1 where employee_id =:employeeId", nativeQuery = true)
+    void deleteEmployee(@Param("employeeId") Long employeeId);
+
+//    @Query(value = "select * from " +
+//            "employee where flag =1 and employee_id =:employeeId", nativeQuery = true)
+//    Optional<Employee> findEmployeeById(@Param("employeeId") Long employeeId);
+
+    @Query(value = "select * from " +
+            "employee where flag=0 and name like :keyName and phone like :keyPhone and address like :keyAddress", nativeQuery = true)
+    Page<Employee> searchEmployeeByNamePhoneAddress(Pageable pageable,@Param("keyName") String keyName,@Param("keyPhone") String keyPhone,
+                                                    @Param("keyAddress") String keyAddress);
+
+    @Query(value ="select distinct address from employee "
+            , nativeQuery = true)
+    List<String> findAllListEmployee();
+
+    //Creator: Nhung
+    @Query(value = "SELECT employee.* FROM employee " +
+            "join account on employee.account_id = account.account_id WHERE employee.flag = 0", nativeQuery = true)
+    List<Employee> listEmployee();
 }
